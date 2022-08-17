@@ -4,7 +4,8 @@
 
 var generateBtn = document.querySelector("#generate");
 
-var special = [ "!", "#", "$", "%", "&", "@", "*"];
+var special = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '}', '~']
+
 var upperCase = [
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
   'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
@@ -23,8 +24,7 @@ var passwordCriteria = {
   specialChar : true
 }
 
-var generatePass = [];
-var finalPass = [];
+
 
 // Write password to the #password input
 function writePassword() {
@@ -64,6 +64,15 @@ function writePassword() {
   passwordspecialchar();
   passwordnumeric();
 
+  if (
+    passwordCriteria.numeric === false &&
+    passwordCriteria.specialChar === false &&
+    passwordCriteria.lowerCase === false &&
+    passwordCriteria.upperCase === false 
+    ) {
+      alert("To generate password must select one character type");
+      return null;
+    };
   
 
 
@@ -90,19 +99,12 @@ function writePassword() {
     }
 
     // adds random chars to array then turns it into a string
-    for (var i = 0; i < passwordCriteria.length ; i++) {
-          
-      finalPass.push (generatePass[Math.floor(Math.random() * generatePass.length)]); 
-      }
+    for (var i = 0; i < passwordCriteria.length ; i++) {  
+      finalPass.push(generatePass[Math.floor(Math.random() * generatePass.length)]); 
+    }
 
       return finalPass.join("") ;
-    }
-  
-  
-
-
-
-
+  }
 
 
   var password = generatePassword();
